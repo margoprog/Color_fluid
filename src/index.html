@@ -110,13 +110,14 @@ body { background: #0a0a0f; color: #fff; font-family: monospace; }
 <div id="menu"></div>
 
 <canvas id="canvas"></canvas>
-<button id="close" onclick="closeScene()">✕ Retour</button>
+<button id="close">✕ Retour</button>
 
 <script type="module">
 let cleanup = null
 let activeTab = null
 
 const menu = document.getElementById('menu')
+const closeBtn = document.getElementById('close')
 
 // 🔥 génération grille 15 scènes
 for (let i = 1; i <= 11; i++) {
@@ -177,6 +178,8 @@ function closeScene() {
   document.getElementById('canvas').style.display = 'none'
   document.getElementById('close').style.display = 'none'
 }
+
+closeBtn.addEventListener('click', closeScene)
 </script>
 
 </body>
