@@ -147,14 +147,19 @@ async function loadScene(name, tabEl) {
     cleanup = null
   }
 
-  const module = await import(`./scripts/${name}.js`)
+  try {
+    const module = await import(`./scripts/${name}.js`)
+    
+    const canvas = document.getElementById('canvas')
+    canvas.style.display = 'block'
+    document.getElementById('close').style.display = 'block'
 
-  const canvas = document.getElementById('canvas')
-  canvas.style.display = 'block'
-  document.getElementById('close').style.display = 'block'
-
-  if (module.default) {
-    cleanup = module.default(canvas)
+    if (module.default) {
+      cleanup = module.default(canvas)
+    }
+  } catch (error) {
+    console.error(`Erreur au chargement de ${name}:`, error)
+    alert(`Impossible de charger ${name}`)
   }
 }
 
